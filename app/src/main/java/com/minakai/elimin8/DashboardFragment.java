@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -65,8 +66,19 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view =  inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        // Set button
+        Button enter_data_btn = view.findViewById(R.id.enter_data_btn);
+        enter_data_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.enterDataBtnClicked();
+            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -106,5 +118,6 @@ public class DashboardFragment extends Fragment {
     public interface DashboardFragmentListener {
         // TODO: Update argument type and name
         void onDashboardInputSent(Uri uri);
+        void enterDataBtnClicked();
     }
 }

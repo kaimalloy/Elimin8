@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+
 public class MainActivity extends AppCompatActivity
         implements DashboardFragment.DashboardFragmentListener,
         MasterListFragment.MasterListFragmentListener,
@@ -34,6 +37,23 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Test to call Python
+        Python py = Python.getInstance();
+
+        // input data
+        String[][] arr = {{"Bumpy", "8/1/2019 2pm", "A", "B", "C"},
+                {"Bumpy", "8/5/2019 6pm", "A", "C", "D"},
+                {"Bumpy", "8/12/2019 4pm", "A", "C"},
+                {"Scaly", "8/14/2019 9am", "C", "B", "D"},
+                {"Scaly", "8/20/2019 12pm", "A", "B", "D"},
+                {"Scaly", "8/25/2019 3pm", "A", "B"}};
+
+        PyObject matchingClass = py.getModule("MatchingAlgorithm").callAttr("MatchingAlgorithm");
+        String pyText = matchingClass.callAttr("run", (Object)arr).toString();
+        Log.d("PYTHON", pyText);
+
+
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);

@@ -1,15 +1,31 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.chaquo.python'  // Used for Python integration
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.minakai.elimin8"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        //  Used for Python integration
+        python {
+//            buildPython "C:/Users/Kai/AppData/Local/Programs/Python/Python36/python.exe"
+
+            pip {
+                install "numpy"
+                install "pandas"
+            }
+        }
+
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+
     }
     buildTypes {
         release {
@@ -27,4 +43,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // for filtering Collections in Java. Used to filter user data efficiently
+    //api 'com.google.guava:guava:28.0-android'
 }

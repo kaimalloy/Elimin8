@@ -4,6 +4,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url "https://chaquo.com/maven" }
         
     }
     dependencies {
@@ -11,6 +12,9 @@ buildscript {
         
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+
+        // Used for Python integration
+        classpath "com.chaquo.python:gradle:6.2.1"
     }
 }
 

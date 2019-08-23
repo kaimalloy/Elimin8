@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Theme for the master toggle switch -->
+    <!--<style name="SwitchStyle" >-->
+        <!--<item name="android:thumb">@drawable/switch_thumb</item>-->
+        <!--<item name="trackTint">@color/switch_color</item>-->
+    <!--</style>-->
+
 </resources>

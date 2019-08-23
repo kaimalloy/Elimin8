@@ -3,6 +3,7 @@ package com.minakai.elimin8;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,15 +20,19 @@ public class MainActivity extends AppCompatActivity
         InsightFragment.InsightFragmentListener,
         CalendarBarFragment.CalendarBarFragmentListener,
         SymptomFragment.SymptomFragmentListener,
-        FoodFragment.FoodFragmentListener {
+        FoodFragment.FoodFragmentListener,
+        MasterToggleFragment.MasterToggleFragmentListener,
+        UnverifiedFragment.UnverifiedFragmentListener {
 
     // Initialize each fragment
     private DashboardFragment dash_frag;
     private MasterListFragment master_frag;
+    private UnverifiedFragment unverified_frag;
     private InsightFragment insight_frag;
     private CalendarBarFragment cal_bar_frag;
     private SymptomFragment symptom_frag;
     private FoodFragment food_frag;
+    private MasterToggleFragment toggle_frag;
 
 
     // Fragment State
@@ -61,10 +66,12 @@ public class MainActivity extends AppCompatActivity
 
         dash_frag = new DashboardFragment();
         master_frag = new MasterListFragment();
+        unverified_frag = new UnverifiedFragment();
         insight_frag = new InsightFragment();
         cal_bar_frag = new CalendarBarFragment();
         symptom_frag = new SymptomFragment();
         food_frag = new FoodFragment();
+        toggle_frag = new MasterToggleFragment();
 
 
         getSupportFragmentManager().beginTransaction()
@@ -82,6 +89,7 @@ public class MainActivity extends AppCompatActivity
 
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, dash_frag)
+                        .replace(R.id.cal_fragment_container, cal_bar_frag)
                         .commit();
             }
         });
@@ -90,12 +98,13 @@ public class MainActivity extends AppCompatActivity
         master_lst_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Make Calendar invisible
-                findViewById(R.id.cal_fragment_container).setVisibility(View.GONE);
+                // Make Toggle visible
+                findViewById(R.id.cal_fragment_container).setVisibility(View.VISIBLE);
 
 
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, master_frag)
+                        .replace(R.id.cal_fragment_container, toggle_frag)
                         .commit();
             }
         });
@@ -127,13 +136,17 @@ public class MainActivity extends AppCompatActivity
                             .commit();
                 }
                 else if (frag_state instanceof FoodFragment){
-                    frag_state = master_frag;
+                    frag_state = unverified_frag;
+
+                    // Make Calendar invisible
+                    findViewById(R.id.cal_fragment_container).setVisibility(View.VISIBLE);
+
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.fragment_container, master_frag)
+                            .replace(R.id.fragment_container, unverified_frag)
+                            .replace(R.id.cal_fragment_container, toggle_frag)
                             .commit();
                 }
-
-
+                
             }
         });
 
@@ -149,8 +162,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void enterDataBtnClicked() {
         frag_state = symptom_frag;
+
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, symptom_frag)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
     }
 
@@ -179,4 +194,31 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public void onMasterToggleInputSent(Uri uri) {
+
+    }
+
+    @Override
+    public void unverifiedBtnClicked() {
+        frag_state = unverified_frag;
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, unverified_frag)
+                .commit();
+    }
+
+    @Override
+    public void verifiedBtnClicked() {
+        frag_state = symptom_frag;
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, master_frag)
+                .commit();
+    }
+
+    @Override
+    public void onUnverifiedInputSent(Uri uri) {
+
+    }
 }

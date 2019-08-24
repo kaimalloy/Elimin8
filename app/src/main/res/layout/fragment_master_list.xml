@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:layout_gravity="center_horizontal"
-                card_view:cardBackgroundColor="#EFF8EA"
+                card_view:cardBackgroundColor="@color/lightGreen"
                 card_view:cardCornerRadius="6dp"
                 android:elevation="4dp" >
 
@@ -37,105 +37,27 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="HEllo" />
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:gravity="center_horizontal"
+                        android:text="My Trigger Foods"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
-                    <TextView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="b0ss" />
+                        android:layout_height="match_parent" >
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Hello?" />
+                    </androidx.recyclerview.widget.RecyclerView>
 
-                    <TextView
+                    <Button
+                        android:id="@+id/button5"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:gravity='center_horizontal'
-                        android:text="Yo" />
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:background="@color/orange"
+                        android:radius="20dp"
+                        android:text="Remove from Master List" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

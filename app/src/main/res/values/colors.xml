@@ -3,4 +3,10 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <!--  Mina's Design Colors -->
+    <color name="green">#56B729</color>
+    <color name="lightGreen">#EFF8EA</color>
+    <color name="orange">#F28123</color>
+    <color name="lightOrange">#FEF3E9</color>
 </resources>

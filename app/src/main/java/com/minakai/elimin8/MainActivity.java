@@ -124,6 +124,29 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        //Back button listener
+        Button back_btn = (Button) findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (frag_state instanceof SymptomFragment)
+                {
+                    frag_state = dash_frag;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, dash_frag)
+                            .commit();
+                }
+                else if (frag_state instanceof FoodFragment){
+                    frag_state = symptom_frag;
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, symptom_frag)
+                            .commit();
+                }
+
+            }
+        });
+
+
         // Decide which fragment to show
         Button next_btn = (Button) findViewById(R.id.next_btn);
         next_btn.setOnClickListener(new View.OnClickListener() {

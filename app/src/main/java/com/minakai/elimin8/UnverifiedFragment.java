@@ -5,10 +5,14 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 
 /**
@@ -28,6 +32,10 @@ public class UnverifiedFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    // Arraylist for images and text
+    ArrayList<Integer> imgNames;
+    ArrayList<String[][]> mealPredictions;
 
     private UnverifiedFragmentListener mListener;
 
@@ -66,7 +74,50 @@ public class UnverifiedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_unverified, container, false);
+        View view = inflater.inflate(R.layout.fragment_unverified, container, false);
+
+        // Set up recycler view
+        populateSampleDataMasterList();
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lyt);
+        UnverifiedRecyclerViewAdapter adapter = new UnverifiedRecyclerViewAdapter(imgNames, mealPredictions);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager( new LinearLayoutManager(getActivity()));
+
+        return view;
+    }
+
+    // populate sample data for master list
+    private void populateSampleDataMasterList() {
+        imgNames = new ArrayList<>();
+        mealPredictions = new ArrayList<String[][]>();
+
+        imgNames.add(R.drawable.bumpy);
+        String[][] meal1 = {{"Bananas", "1"},
+                {"Spaghetti and Meatballs", "5"},
+                {"Bananas and Oranges", "3"},
+                {"Asparagus", "2"}};
+        mealPredictions.add(meal1);
+
+        imgNames.add(R.drawable.scaly);
+        String[][] meal2 = {{"Bananas", "1"},
+                {"Spaghetti and Meatballs", "5"},
+                {"Bananas and Oranges", "3"},
+                {"Asparagus", "2"}};
+        mealPredictions.add(meal2);
+
+        imgNames.add(R.drawable.redness);
+        String[][] meal3 = {{"Bananas", "1"},
+                {"Spaghetti and Meatballs", "5"},
+                {"Bananas and Oranges", "3"},
+                {"Asparagus", "2"}};
+        mealPredictions.add(meal3);
+
+        imgNames.add(R.drawable.itchy);
+        String[][] meal4 = {{"Bananas", "1"},
+                {"Spaghetti and Meatballs", "5"},
+                {"Bananas and Oranges", "3"},
+                {"Asparagus", "2"}};
+        mealPredictions.add(meal4);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

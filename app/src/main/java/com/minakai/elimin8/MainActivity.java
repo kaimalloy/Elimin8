@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +15,8 @@ import android.widget.Button;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements DashboardFragment.DashboardFragmentListener,
@@ -44,25 +48,13 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         // Test to call Python
-        Python py = Python.getInstance();
-
-        // input data
-        String[][] arr = {{"Bumpy", "8/1/2019 2pm", "A", "B", "C"},
-                {"Bumpy", "8/5/2019 6pm", "A", "C", "D"},
-                {"Bumpy", "8/12/2019 4pm", "A", "C"},
-                {"Scaly", "8/14/2019 9am", "C", "B", "D"},
-                {"Scaly", "8/20/2019 12pm", "A", "B", "D"},
-                {"Scaly", "8/25/2019 3pm", "A", "B"}};
-
-        PyObject matchingClass = py.getModule("MatchingAlgorithm").callAttr("MatchingAlgorithm");
-        String pyText = matchingClass.callAttr("run", (Object)arr).toString();
-        Log.d("PYTHON", pyText);
+        callPython();
 
 
-
+        // turn off the default window title
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);  // turn off the default window title
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         dash_frag = new DashboardFragment();
         master_frag = new MasterListFragment();
@@ -173,6 +165,24 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+    }
+
+
+    // call sample Python Output
+    public void callPython(){
+        Python py = Python.getInstance();
+
+        // input data
+        String[][] arr = {{"Bumpy", "8/1/2019 2pm", "A", "B", "C"},
+                {"Bumpy", "8/5/2019 6pm", "A", "C", "D"},
+                {"Bumpy", "8/12/2019 4pm", "A", "C"},
+                {"Scaly", "8/14/2019 9am", "C", "B", "D"},
+                {"Scaly", "8/20/2019 12pm", "A", "B", "D"},
+                {"Scaly", "8/25/2019 3pm", "A", "B"}};
+
+        PyObject matchingClass = py.getModule("MatchingAlgorithm").callAttr("MatchingAlgorithm");
+        String pyText = matchingClass.callAttr("run", (Object)arr).toString();
+        Log.d("PYTHON", pyText);
     }
 
 

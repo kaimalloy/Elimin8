@@ -5,8 +5,12 @@
     <color name="colorAccent">#D81B60</color>
 
     <!--  Mina's Design Colors -->
-    <color name="green">#56B729</color>
     <color name="lightGreen">#EFF8EA</color>
-    <color name="orange">#F28123</color>
+    <color name="green">#56B729</color>
     <color name="lightOrange">#FEF3E9</color>
+    <color name="orange">#F28123</color>
+    <color name="lightGray">#E1E1E1</color>
+    <color name="MedLightGray">#C4C4C4</color>
+    <color name="MedDarkGray">#8D8D8D</color>
+    <color name="darkGray">#60695C</color>
 </resources>

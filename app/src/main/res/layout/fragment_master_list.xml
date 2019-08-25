@@ -27,7 +27,7 @@
                 android:layout_margin="20dp"
                 android:layout_gravity="center_horizontal"
                 card_view:cardBackgroundColor="@color/lightGreen"
-                card_view:cardCornerRadius="6dp"
+                card_view:cardCornerRadius="20dp"
                 android:elevation="4dp" >
 
                 <LinearLayout
@@ -46,7 +46,8 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
+                        android:layout_height="match_parent"
+                        android:id="@+id/recycler_view_lyt">
 
                     </androidx.recyclerview.widget.RecyclerView>
 

@@ -78,9 +78,8 @@ public class MasterListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_master_list, container, false);
 
-
         // Set up recycler view
-        populateSampleDataMasterList();
+        populateSampleData();
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lyt);
         MasterRecyclerViewAdapter adapter = new MasterRecyclerViewAdapter(imgNames, foodNames);
         recyclerView.setAdapter(adapter);
@@ -91,7 +90,7 @@ public class MasterListFragment extends Fragment {
 
 
     // populate sample data for master list
-    private void populateSampleDataMasterList(){
+    private void populateSampleData(){
         imgNames = new ArrayList<>();
         foodNames = new ArrayList<>();
 

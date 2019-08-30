@@ -77,7 +77,7 @@ public class UnverifiedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_unverified, container, false);
 
         // Set up recycler view
-        populateSampleDataMasterList();
+        populateSampleData();
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lyt);
         UnverifiedRecyclerViewAdapter adapter = new UnverifiedRecyclerViewAdapter(imgNames, mealPredictions);
         recyclerView.setAdapter(adapter);
@@ -87,7 +87,7 @@ public class UnverifiedFragment extends Fragment {
     }
 
     // populate sample data for master list
-    private void populateSampleDataMasterList() {
+    private void populateSampleData() {
         imgNames = new ArrayList<>();
         mealPredictions = new ArrayList<String[][]>();
 

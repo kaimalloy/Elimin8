@@ -5,10 +5,18 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -28,6 +36,10 @@ public class FoodFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    // Arraylist for the foods in each card
+    ArrayList<ArrayList<String>> foodNames;
 
     private FoodFragmentListener mListener;
 
@@ -66,8 +78,43 @@ public class FoodFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_food, container, false);
+        View view = inflater.inflate(R.layout.fragment_food, container, false);
+
+        // Set up recycler view
+        populateSampleData();
+        final RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lyt);
+        recyclerView.setVisibility(View.GONE);
+        FoodRecyclerViewAdapter adapter = new FoodRecyclerViewAdapter(getContext(), foodNames);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager( new LinearLayoutManager(getActivity()));
+
+
+        // Temporarily set info button as meals show button
+        Button info_btn = view.findViewById(R.id.info_btn);
+        final LinearLayout info_lbl = view.findViewById(R.id.info_lbl);
+        info_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                info_lbl.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        return view;
     }
+
+
+    // populate sample data for food input
+    private void populateSampleData() {
+        foodNames = new ArrayList<>();
+
+        foodNames.add(new ArrayList<>(Arrays.asList("Apples", "Lasagna", "Green Peas")));
+        foodNames.add(new ArrayList<>(Arrays.asList("Milk", "Coco Puffs")));
+        foodNames.add(new ArrayList<>(Arrays.asList("Fried Chicken", "Grapefruit", "Cookie", "Tomatoes")));
+        foodNames.add(new ArrayList<>(Arrays.asList("Spaghetti and Meatballs")));
+        foodNames.add(new ArrayList<>(Arrays.asList("Cornbread", "Orange Juice", "Spinach Salad")));
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

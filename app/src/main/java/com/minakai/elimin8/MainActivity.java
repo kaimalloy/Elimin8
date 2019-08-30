@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity
     public void onFoodInputSent(Uri uri) {
 
     }
-
+    
     @Override
     public void onMasterToggleInputSent(Uri uri) {
 

@@ -1,6 +1,7 @@
 package com.minakai.elimin8;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +17,12 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 /**
@@ -28,6 +34,9 @@ import java.util.Arrays;
  * create an instance of this fragment.
  */
 public class FoodFragment extends Fragment {
+
+    private static final String TAG = "FoodFragment";
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -97,6 +106,15 @@ public class FoodFragment extends Fragment {
             public void onClick(View view) {
                 info_lbl.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
+            }
+        });
+
+        // Listener for FAB button
+        FloatingActionButton fab_btn = view.findViewById(R.id.fab);
+        fab_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), FoodPopupActivity.class));
             }
         });
 

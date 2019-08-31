@@ -1,7 +1,7 @@
 package com.minakai.elimin8;
 
+import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -9,20 +9,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 /**
@@ -114,7 +110,9 @@ public class FoodFragment extends Fragment {
         fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), FoodPopupActivity.class));
+//                startActivity(new Intent(getContext(), FoodPopupActivity.class));
+                FoodDialog dialog = new FoodDialog(getContext());
+                dialog.show();
             }
         });
 

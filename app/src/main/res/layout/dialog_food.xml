@@ -3,9 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_gravity="center"
-    android:padding="5dp"
-    android:layout_margin="10dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -32,10 +29,11 @@
 
                 <TextView
                     android:id="@+id/textView18"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
                     android:layout_marginTop="50dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/bariol_bold"
                     android:text="Meal 1"
                     android:textSize="25sp" />
@@ -49,46 +47,19 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical" >
 
-                        <TableLayout
+
+                        <LinearLayout
+                            android:id="@+id/food_item_lyt"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-                            <TableRow
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:padding="10dp">
+<!--                            <include layout="@layout/input_item_food_dialog" />-->
 
-                                <EditText
-                                    android:id="@+id/editText2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:ems="10"
-                                    android:inputType="textCapWords"
-                                    android:background="@android:color/white"
-                                    android:text="Grapefruit" />
-
-                                <ImageButton
-                                    android:id="@+id/imageButton"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
-                                    android:layout_gravity="left"
-                                    app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
-
-                            </TableRow>
-
-                            <TableRow
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
-
-                            <TableRow
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
-                        </TableLayout>
+                        </LinearLayout>
 
                         <Button
-                            android:id="@+id/button6"
+                            android:id="@+id/add_btn"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
                             android:layout_gravity="center"
@@ -107,7 +78,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button9"
+                    android:id="@+id/cancel_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cancel" />
@@ -117,7 +88,7 @@
                     android:layout_height="match_parent" />
 
                 <Button
-                    android:id="@+id/button10"
+                    android:id="@+id/save_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Save" />

@@ -8,12 +8,6 @@
         <item name="colorAccent">@color/green</item>
     </style>
 
-    <!--  Theme for the Foods Pop up  -->
-    <style name="AppTheme.Popup">
-        <item name="android:windowIsTranslucent">true</item>
-
-    </style>
-
     <!-- Theme for the master toggle switch -->
     <!--<style name="SwitchStyle" >-->
         <!--<item name="android:thumb">@drawable/switch_thumb</item>-->

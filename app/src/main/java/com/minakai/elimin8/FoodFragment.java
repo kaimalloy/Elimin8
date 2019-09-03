@@ -2,6 +2,7 @@ package com.minakai.elimin8;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -112,6 +113,13 @@ public class FoodFragment extends Fragment {
             public void onClick(View view) {
 //                startActivity(new Intent(getContext(), FoodPopupActivity.class));
                 FoodDialog dialog = new FoodDialog(getContext());
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(final DialogInterface arg0) {
+                        info_lbl.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    }
+                });
                 dialog.show();
             }
         });

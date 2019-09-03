@@ -1,25 +1,16 @@
 package com.minakai.elimin8;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Layout;
 import android.util.Log;
-import android.view.KeyboardShortcutGroup;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FoodDialog extends Dialog implements View.OnClickListener {
 
@@ -29,8 +20,11 @@ public class FoodDialog extends Dialog implements View.OnClickListener {
     Button cancel_btn;
     Button save_btn;
 
-    LinearLayout food_item_lyt;
-    ArrayList<Integer> editTexts;
+    // Recycler View Adapter used to add items dynamically
+    FoodDialogRecyclerViewAdapter rvAdapter;
+
+    // Final food input values that are saved
+    ArrayList<String> enteredFoods;
 
     public FoodDialog(Context context) {
         super(context);
@@ -44,8 +38,6 @@ public class FoodDialog extends Dialog implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_food);
 
-        food_item_lyt = findViewById(R.id.food_item_lyt);
-
         add_btn = findViewById(R.id.add_btn);
         add_btn.setOnClickListener(this);
 
@@ -55,46 +47,33 @@ public class FoodDialog extends Dialog implements View.OnClickListener {
         save_btn = findViewById(R.id.save_btn);
         save_btn.setOnClickListener(this);
 
+        // Set up recycler view
+        final RecyclerView recyclerView = findViewById(R.id.food_item_lyt);
+        rvAdapter = new FoodDialogRecyclerViewAdapter();
+        recyclerView.setAdapter(rvAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         // Add one Food Input Item to begin with
-        addFoodInputItem();
+        rvAdapter.addItem();
 
     }
 
     @Override
     public void onClick(View view) {
 
-        switch(view.getId()){
+        switch (view.getId()) {
             case R.id.add_btn:
-                addFoodInputItem();
+                rvAdapter.addItem();
                 break;
             case R.id.cancel_btn:
                 dismiss();
                 break;
             case R.id.save_btn:
-                dismiss();
+                enteredFoods = rvAdapter.getEnteredFoods();
+                Log.d(TAG, "Saved Data:" + enteredFoods.toString());
+
+//                dismiss();
                 break;
         }
     }
-
-    private void addFoodInputItem(){
-        View child = getLayoutInflater().inflate(R.layout.input_item_food_dialog, null);
-        food_item_lyt.addView(child);
-    }
-
-//    // class to store the data from each Edit Text
-//    public class FoodItem extends Activity {
-//
-//        String foodName;
-//
-//        public FoodItem(Context context){
-//            super(context);
-//        }
-//
-//        @Override
-//        protected void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//            setContentView(R.layout.dialog_food);
-//
-//
-//    }
 }

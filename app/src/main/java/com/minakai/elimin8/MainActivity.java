@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity
                 .commit();
 
 
-        Button home_btn = (Button) findViewById(R.id.home_btn);
+        ImageButton home_btn = (ImageButton) findViewById(R.id.home_btn);
         home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        Button master_lst_btn = (Button) findViewById(R.id.master_lst_btn);
+        ImageButton master_lst_btn = (ImageButton) findViewById(R.id.master_lst_btn);
         master_lst_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-        Button insight_btn = (Button) findViewById(R.id.insight_btn);
+        ImageButton insight_btn = (ImageButton) findViewById(R.id.insight_btn);
         insight_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

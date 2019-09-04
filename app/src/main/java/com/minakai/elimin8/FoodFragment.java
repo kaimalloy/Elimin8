@@ -1,6 +1,5 @@
 package com.minakai.elimin8;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
@@ -15,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -30,7 +30,7 @@ import java.util.Arrays;
  * Use the {@link FoodFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FoodFragment extends Fragment {
+public class FoodFragment extends Fragment implements FoodDialogFragment.FoodDialogListener {
 
     private static final String TAG = "FoodFragment";
 
@@ -43,9 +43,13 @@ public class FoodFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private LinearLayout info_lbl;
+    private RecyclerView recyclerView;
+    private FoodRecyclerViewAdapter rvAdapter;
+
 
     // Arraylist for the foods in each card
-    ArrayList<ArrayList<String>> foodNames;
+    private ArrayList<ArrayList<String>> meals = new ArrayList<>();
 
     private FoodFragmentListener mListener;
 
@@ -87,22 +91,22 @@ public class FoodFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_food, container, false);
 
         // Set up recycler view
-        populateSampleData();
-        final RecyclerView recyclerView = view.findViewById(R.id.recycler_view_lyt);
+//        populateSampleData();
+        recyclerView = view.findViewById(R.id.recycler_view_lyt);
         recyclerView.setVisibility(View.GONE);
-        FoodRecyclerViewAdapter adapter = new FoodRecyclerViewAdapter(getContext(), foodNames);
-        recyclerView.setAdapter(adapter);
+        rvAdapter = new FoodRecyclerViewAdapter(getContext(), meals);
+        recyclerView.setAdapter(rvAdapter);
         recyclerView.setLayoutManager( new LinearLayoutManager(getActivity()));
 
 
-        // Temporarily set info button as meals show button
+        // When info BTN is pressed
         Button info_btn = view.findViewById(R.id.info_btn);
-        final LinearLayout info_lbl = view.findViewById(R.id.info_lbl);
+        info_lbl = view.findViewById(R.id.info_lbl);
         info_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                info_lbl.setVisibility(View.GONE);
-                recyclerView.setVisibility(View.VISIBLE);
+                Toast toast = Toast.makeText(getContext(), "Info BTN pressed", Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
@@ -111,16 +115,10 @@ public class FoodFragment extends Fragment {
         fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(getContext(), FoodPopupActivity.class));
-                FoodDialog dialog = new FoodDialog(getContext());
-                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(final DialogInterface arg0) {
-                        info_lbl.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                    }
-                });
-                dialog.show();
+                //show the dialog
+                FoodDialogFragment dialog = new FoodDialogFragment();
+                dialog.setTargetFragment(FoodFragment.this, 1);
+                dialog.show(getFragmentManager(), "FoodDialogFragment");
             }
         });
 
@@ -130,13 +128,13 @@ public class FoodFragment extends Fragment {
 
     // populate sample data for food input
     private void populateSampleData() {
-        foodNames = new ArrayList<>();
+        meals = new ArrayList<>();
 
-        foodNames.add(new ArrayList<>(Arrays.asList("Apples", "Lasagna", "Green Peas")));
-        foodNames.add(new ArrayList<>(Arrays.asList("Milk", "Coco Puffs")));
-        foodNames.add(new ArrayList<>(Arrays.asList("Fried Chicken", "Grapefruit", "Cookie", "Tomatoes")));
-        foodNames.add(new ArrayList<>(Arrays.asList("Spaghetti and Meatballs")));
-        foodNames.add(new ArrayList<>(Arrays.asList("Cornbread", "Orange Juice", "Spinach Salad")));
+        meals.add(new ArrayList<>(Arrays.asList("Apples", "Lasagna", "Green Peas")));
+        meals.add(new ArrayList<>(Arrays.asList("Milk", "Coco Puffs")));
+        meals.add(new ArrayList<>(Arrays.asList("Fried Chicken", "Grapefruit", "Cookie", "Tomatoes")));
+        meals.add(new ArrayList<>(Arrays.asList("Spaghetti and Meatballs")));
+        meals.add(new ArrayList<>(Arrays.asList("Cornbread", "Orange Juice", "Spinach Salad")));
     }
 
 
@@ -164,6 +162,16 @@ public class FoodFragment extends Fragment {
         mListener = null;
     }
 
+    // method implemented for FoodDialogFragment
+    @Override
+    public void getFoodsFromDialog(ArrayList<String> foods) {
+        meals.add(foods);
+        rvAdapter.notifyDataSetChanged();
+
+        info_lbl.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -177,5 +185,6 @@ public class FoodFragment extends Fragment {
     public interface FoodFragmentListener {
         // TODO: Update argument type and name
         void onFoodInputSent(Uri uri);
+        void setMeals(ArrayList<ArrayList<String>> meals);
     }
 }

@@ -41,7 +41,8 @@
                     android:id="@+id/button"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:background="@drawable/itchy" />
+                    android:background="@drawable/itchy_btn"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -61,7 +62,7 @@
                     android:id="@+id/button2"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:background="@drawable/bumpy" />
+                    android:background="@drawable/bumpy_btn" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -88,7 +89,7 @@
                     android:id="@+id/button3"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:background="@drawable/redness" />
+                    android:background="@drawable/redness_btn" />
 
                 <TextView
                     android:id="@+id/textView19"
@@ -110,7 +111,7 @@
                     android:id="@+id/button4"
                     android:layout_width="130dp"
                     android:layout_height="130dp"
-                    android:background="@drawable/scaly" />
+                    android:background="@drawable/scaly_btn" />
 
                 <TextView
                     android:layout_width="wrap_content"

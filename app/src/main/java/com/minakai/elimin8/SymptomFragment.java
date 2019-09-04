@@ -9,6 +9,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 
 /**
@@ -28,6 +33,13 @@ public class SymptomFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private final String itchy_str = "Itchy";
+    private final String bumpy_str = "Bumpy";
+    private final String redness_str = "Redness";
+    private final String scaly_str = "Scaly";
+
+    private HashSet<String> symptoms = new HashSet<>();
 
     private SymptomFragmentListener mListener;
 
@@ -66,7 +78,61 @@ public class SymptomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_symptom, container, false);
+        View view = inflater.inflate(R.layout.fragment_symptom, container, false);
+
+        CheckBox itchy_btn = view.findViewById(R.id.itchy_btn);
+        itchy_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    symptoms.add(itchy_str);
+                }
+                else{
+                    symptoms.remove(itchy_str);
+                }
+            }
+        });
+
+        CheckBox bumpy_btn = view.findViewById(R.id.bumpy_btn);
+        bumpy_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    symptoms.add(bumpy_str);
+                }
+                else{
+                    symptoms.remove(bumpy_str);
+                }
+            }
+        });
+
+        CheckBox redness_btn = view.findViewById(R.id.redness_btn);
+        redness_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    symptoms.add(redness_str);
+                }
+                else{
+                    symptoms.remove(redness_str);
+                }
+            }
+        });
+
+        CheckBox scaly_btn = view.findViewById(R.id.scaly_btn);
+        scaly_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (b){
+                    symptoms.add(scaly_str);
+                }
+                else{
+                    symptoms.remove(scaly_str);
+                }
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -91,6 +157,10 @@ public class SymptomFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public HashSet<String> getSymptoms() {
+        return symptoms;
     }
 
     /**

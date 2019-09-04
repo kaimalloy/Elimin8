@@ -18,6 +18,7 @@ import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class MainActivity extends AppCompatActivity
         implements DashboardFragment.DashboardFragmentListener,
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity
         FoodFragment.FoodFragmentListener,
         MasterToggleFragment.MasterToggleFragmentListener,
         UnverifiedFragment.UnverifiedFragmentListener {
+
+    private static final String TAG = "MainActivity";
 
     // Initialize each fragment
     private DashboardFragment dash_frag;
@@ -152,12 +155,17 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 if (frag_state instanceof SymptomFragment){
+                    flareUp.setSymptoms(((SymptomFragment) frag_state).getSymptoms());
+
                     frag_state = food_frag;
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, food_frag)
                             .commit();
                 }
                 else if (frag_state instanceof FoodFragment){
+                    // Set the meals for the flare up
+                    flareUp.setMeals(((FoodFragment) frag_state).getMeals());
+
                     frag_state = unverified_frag;
 
                     // Make Calendar invisible
@@ -231,11 +239,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void setMeals(ArrayList<ArrayList<String>> meals) {
-        flareUp.setMeals(meals);
-    }
-
-    @Override
     public void onFoodInputSent(Uri uri) {
 
     }
@@ -272,22 +275,26 @@ public class MainActivity extends AppCompatActivity
     // Flare Up class to represent
     private class FlareUp {
 
-        ArrayList<String> symptoms = new ArrayList<>();
+        private static final String TAG = "FlareUp";
+
+        HashSet<String> symptoms = new HashSet<>();
         ArrayList<ArrayList<String>> meals = new ArrayList<>();
         String timestamp = "";
 
         public FlareUp() {
         }
 
-        public void setSymptoms(ArrayList<String> symptoms) {
+        public void setSymptoms(HashSet<String> symptoms) {
+            Log.d(TAG, "Symptoms Entered: " + symptoms.toString());
             this.symptoms = symptoms;
         }
 
-        public ArrayList<String> getSymptoms() {
+        public HashSet<String> getSymptoms() {
             return symptoms;
         }
 
         public void setMeals(ArrayList<ArrayList<String>> meals) {
+            Log.d(TAG, "Meals Entered: " + meals.toString());
             this.meals = meals;
         }
 
@@ -300,7 +307,8 @@ public class MainActivity extends AppCompatActivity
         }
 
         public void reset() {
-            symptoms = new ArrayList<>();
+            Log.d(TAG, "Flare up reset.");
+            symptoms = new HashSet<>();
             meals = new ArrayList<>();
             timestamp = "";
         }

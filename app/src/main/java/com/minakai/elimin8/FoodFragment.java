@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -172,6 +173,10 @@ public class FoodFragment extends Fragment implements FoodDialogFragment.FoodDia
         recyclerView.setVisibility(View.VISIBLE);
     }
 
+    public ArrayList<ArrayList<String>> getMeals() {
+        return meals;
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -185,6 +190,5 @@ public class FoodFragment extends Fragment implements FoodDialogFragment.FoodDia
     public interface FoodFragmentListener {
         // TODO: Update argument type and name
         void onFoodInputSent(Uri uri);
-        void setMeals(ArrayList<ArrayList<String>> meals);
     }
 }

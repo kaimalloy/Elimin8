@@ -43,10 +43,16 @@ public class MainActivity extends AppCompatActivity
     // Fragment State
     private Fragment frag_state;
 
+    // Flare Up Object
+    private FlareUp flareUp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // new flare up object
+        flareUp = new FlareUp();
 
         // Test to call Python
         callPython();
@@ -169,6 +175,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+
     // call sample Python Output
     public void callPython(){
         Python py = Python.getInstance();
@@ -224,6 +231,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+    public void setMeals(ArrayList<ArrayList<String>> meals) {
+        flareUp.setMeals(meals);
+    }
+
+    @Override
     public void onFoodInputSent(Uri uri) {
 
     }
@@ -253,6 +265,45 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onUnverifiedInputSent(Uri uri) {
+
+    }
+
+
+    // Flare Up class to represent
+    private class FlareUp {
+
+        ArrayList<String> symptoms = new ArrayList<>();
+        ArrayList<ArrayList<String>> meals = new ArrayList<>();
+        String timestamp = "";
+
+        public FlareUp() {
+        }
+
+        public void setSymptoms(ArrayList<String> symptoms) {
+            this.symptoms = symptoms;
+        }
+
+        public ArrayList<String> getSymptoms() {
+            return symptoms;
+        }
+
+        public void setMeals(ArrayList<ArrayList<String>> meals) {
+            this.meals = meals;
+        }
+
+        public ArrayList<ArrayList<String>> getMeals() {
+            return meals;
+        }
+
+        public String getTimestamp() {
+            return timestamp;
+        }
+
+        public void reset() {
+            symptoms = new ArrayList<>();
+            meals = new ArrayList<>();
+            timestamp = "";
+        }
 
     }
 }

@@ -1,5 +1,6 @@
 package com.minakai.elimin8;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -10,12 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -81,50 +86,43 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.cal_fragment_container, cal_bar_frag)
                 .commit();
 
-
-        ImageButton home_btn = (ImageButton) findViewById(R.id.home_btn);
-        home_btn.setOnClickListener(new View.OnClickListener() {
+        BottomNavigationView nav = findViewById(R.id.nav);
+        nav.setItemIconTintList(null); // remove unnecessary color
+        nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                // Make Calendar visible
-                findViewById(R.id.cal_fragment_container).setVisibility(View.VISIBLE);
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_home:
+                        // Make Calendar visible
+                        findViewById(R.id.cal_fragment_container).setVisibility(View.VISIBLE);
 
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, dash_frag)
-                        .replace(R.id.cal_fragment_container, cal_bar_frag)
-                        .commit();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, dash_frag)
+                                .replace(R.id.cal_fragment_container, cal_bar_frag)
+                                .commit();
+                        break;
+                    case R.id.nav_master_list:
+                        // Make Toggle visible
+                        findViewById(R.id.cal_fragment_container).setVisibility(View.VISIBLE);
+
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, master_frag)
+                                .replace(R.id.cal_fragment_container, toggle_frag)
+                                .commit();
+                        break;
+                    case R.id.nav_insight:
+                        // Make Calendar invisible
+                        findViewById(R.id.cal_fragment_container).setVisibility(View.GONE);
+
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, insight_frag)
+                                .commit();
+                        break;
+                }
+                return true;
             }
         });
 
-        ImageButton master_lst_btn = (ImageButton) findViewById(R.id.master_lst_btn);
-        master_lst_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Make Toggle visible
-                findViewById(R.id.cal_fragment_container).setVisibility(View.VISIBLE);
-
-
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, master_frag)
-                        .replace(R.id.cal_fragment_container, toggle_frag)
-                        .commit();
-            }
-        });
-
-
-        ImageButton insight_btn = (ImageButton) findViewById(R.id.insight_btn);
-        insight_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Make Calendar invisible
-                findViewById(R.id.cal_fragment_container).setVisibility(View.GONE);
-
-
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, insight_frag)
-                        .commit();
-            }
-        });
 
         //Back button listener
         Button back_btn = (Button) findViewById(R.id.back_btn);

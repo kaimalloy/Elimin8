@@ -39,7 +39,7 @@ public class FoodDialogFragment extends DialogFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.dialog_fragment_food, container, false);
 
-//        view.setCanceledOnTouchOutside(false);
+        this.getDialog().setCanceledOnTouchOutside(false);
 
         // Set up recycler view
         final RecyclerView recyclerView = view.findViewById(R.id.food_item_lyt);

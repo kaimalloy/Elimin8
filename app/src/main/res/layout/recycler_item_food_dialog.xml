@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
+        android:padding="10dp"
         android:inputType="textCapWords"
         android:background="@android:color/white"
         android:hint="Enter a food"/>
@@ -20,7 +21,7 @@
         android:id="@+id/edit_close_btn"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_gravity="start"
-        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/whiteexit" />
 
 </LinearLayout>

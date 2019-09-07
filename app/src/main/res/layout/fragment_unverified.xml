@@ -41,8 +41,8 @@
                         android:layout_margin="20dp"
                         android:gravity="center_horizontal"
                         android:text="Trigger Food Candidates"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:fontFamily="@font/bariol_bold"
+                        android:textSize="24sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -50,17 +50,15 @@
                         android:paddingBottom="3dp"
                         android:paddingTop="3dp"
                         android:orientation="horizontal"
-                        android:background="@color/lightGray"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_marginRight="20dp">
+                        android:background="@color/white">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="6"
                             android:text="Date"
+                            android:layout_marginLeft="20dp"
+                            android:fontFamily="@font/bariol_light"
                             android:textSize="10sp" />
 
                         <TextView
@@ -68,6 +66,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
                             android:text="Food Prediction"
+                            android:fontFamily="@font/bariol_light"
                             android:textSize="10sp" />
 
                         <TextView
@@ -75,12 +74,15 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="# of Occurrences"
+                            android:fontFamily="@font/bariol_light"
+                            android:layout_marginRight="20dp"
                             android:textSize="10sp" />
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:padding="10dp"
                         android:id="@+id/recycler_view_lyt">
 
                     </androidx.recyclerview.widget.RecyclerView>
@@ -90,9 +92,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        android:background="@color/orange"
-                        android:radius="20dp"
-                        android:text="Add to Master List" />
+                        android:background="@drawable/ok_btn"
+                        android:text="Add to Master List"
+                        android:textColor="@color/white"/>
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

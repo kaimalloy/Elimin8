@@ -6,38 +6,22 @@
     android:orientation="horizontal"
     tools:context=".MasterToggleFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/master_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/unverified_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unverified" />
 
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_weight="0.2" />
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/verified_tab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verified" />
 
-    <Button
-        android:id="@+id/unverified_btn"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:text="Unverified"
-        android:fontFamily="@font/bariol_bold"
-        />
-
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_weight="0.2" />
-
-    <Button
-        android:id="@+id/verified_btn"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_weight="1"
-        android:text="Verified"
-        android:fontFamily="@font/bariol_bold"/>
-
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_weight="0.2" />
+    </com.google.android.material.tabs.TabLayout>
 </LinearLayout>

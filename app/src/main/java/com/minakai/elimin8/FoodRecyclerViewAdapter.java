@@ -34,6 +34,7 @@ public class FoodRecyclerViewAdapter extends RecyclerView.Adapter<FoodRecyclerVi
         // Add new TextViews
         for (String food: foodNames.get(pos)){
             TextView textView = new TextView(mContext);
+            textView.setPadding(40, 0, 40,40);
             textView.setText(food);
             lyt.addView(textView);
         }

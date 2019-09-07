@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TableLayout;
+
+import com.google.android.material.tabs.TabLayout;
 
 
 /**
@@ -71,22 +74,46 @@ public class MasterToggleFragment extends Fragment {
 
 
         // Set button
-        Button unverified_btn = view.findViewById(R.id.unverified_btn);
-        unverified_btn.setOnClickListener(new View.OnClickListener() {
+//        Button unverified_btn = view.findViewById(R.id.unverified_btn);
+//        unverified_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mListener.unverifiedBtnClicked();
+//            }
+//        });
+//
+//        // Set button
+//        Button verified_btn = view.findViewById(R.id.verified_btn);
+//        verified_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mListener.verifiedBtnClicked();
+//            }
+//        });
+
+        TabLayout master_tab_layout=view.findViewById(R.id.master_tab_layout);
+        master_tab_layout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onClick(View view) {
-                mListener.unverifiedBtnClicked();
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getPosition() ==0){
+                    mListener.unverifiedBtnClicked();
+                }
+                else if(tab.getPosition() ==1){
+                    mListener.verifiedBtnClicked();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
 
-        // Set button
-        Button verified_btn = view.findViewById(R.id.verified_btn);
-        verified_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.verifiedBtnClicked();
-            }
-        });
 
         return view;
     }

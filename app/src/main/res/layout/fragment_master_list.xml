@@ -41,8 +41,8 @@
                         android:layout_margin="20dp"
                         android:gravity="center_horizontal"
                         android:text="My Trigger Foods"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
+                        android:fontFamily="@font/bariol_bold"
+                        android:textSize="24sp"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view_lyt"
@@ -54,8 +54,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
-                        android:background="@color/orange"
-                        android:radius="20dp"
+                        android:background="@drawable/ok_btn"
+                        android:textColor="@color/white"
                         android:text="Remove from Master List" />
                 </LinearLayout>
 

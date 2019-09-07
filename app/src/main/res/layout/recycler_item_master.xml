@@ -9,8 +9,11 @@
 
     <ImageView
         android:id="@+id/recycle_item_img"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/scaly" />
@@ -23,6 +26,7 @@
         android:layout_marginLeft="30dp"
         android:text="Food Name"
         android:textSize="24sp"
+        android:fontFamily="@font/bariol_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/recycle_item_img"
         app:layout_constraintTop_toTopOf="parent" />

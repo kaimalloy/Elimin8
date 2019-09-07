@@ -8,6 +8,7 @@
     android:gravity="center_horizontal"
     tools:context=".DashboardFragment">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -19,13 +20,12 @@
             android:layout_height="200dp"
             android:layout_centerInParent="true"
             android:background="@drawable/round_btn"
-            android:textColor="@android:color/white"
             android:fontFamily="@font/bariol_bold_italic"
             android:text="Enter\nToday's\nData"
+            android:textColor="@android:color/white"
             android:textSize="30sp" />
 
     </RelativeLayout>
-
 
     <TextView
         android:id="@+id/textView13"

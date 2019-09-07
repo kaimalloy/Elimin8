@@ -36,8 +36,9 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:text="Meal 1"
+                    android:fontFamily="@font/bariol_bold"
                     android:textColor="@color/green"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <Button
@@ -67,7 +68,8 @@
                 android:id="@+id/meal_lyt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical" />
+                android:orientation="vertical"
+                android:paddingTop="15dp"/>
 
         </LinearLayout>
 

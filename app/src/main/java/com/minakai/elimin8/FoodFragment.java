@@ -177,6 +177,11 @@ public class FoodFragment extends Fragment implements FoodDialogFragment.FoodDia
         return meals;
     }
 
+    // clear the meals for the next flare up entry
+    public void resetMeals() {
+        meals = new ArrayList<>();
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

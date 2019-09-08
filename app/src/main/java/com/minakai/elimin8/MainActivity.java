@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,15 +12,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageButton;
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 
 public class MainActivity extends AppCompatActivity
@@ -39,7 +35,7 @@ public class MainActivity extends AppCompatActivity
 
     // Initialize each fragment
     private DashboardFragment dash_frag;
-    private MasterListFragment master_frag;
+    private MasterListFragment verified_frag;
     private UnverifiedFragment unverified_frag;
     private InsightFragment insight_frag;
     private CalendarBarFragment cal_bar_frag;
@@ -54,6 +50,9 @@ public class MainActivity extends AppCompatActivity
     // Flare Up Object
     private FlareUp flareUp;
 
+    // Python backend Object
+    PyObject pyMatchGenerator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +61,13 @@ public class MainActivity extends AppCompatActivity
         // new flare up object
         flareUp = new FlareUp();
 
-        // Test to call Python
-        callPython();
+        // Initialize Python
+        Python py = Python.getInstance();
+        pyMatchGenerator = py.getModule("PyBackend").callAttr("PyBackend");
+
+
+        // Python test
+//        callPython();
 
 
         // turn off the default window title
@@ -72,8 +76,8 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         dash_frag = new DashboardFragment();
-        master_frag = new MasterListFragment();
         unverified_frag = new UnverifiedFragment();
+        verified_frag = new MasterListFragment();
         insight_frag = new InsightFragment();
         cal_bar_frag = new CalendarBarFragment();
         symptom_frag = new SymptomFragment();
@@ -106,7 +110,7 @@ public class MainActivity extends AppCompatActivity
                         findViewById(R.id.cal_fragment_container).setVisibility(View.VISIBLE);
 
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.fragment_container, master_frag)
+                                .replace(R.id.fragment_container, verified_frag)
                                 .replace(R.id.cal_fragment_container, toggle_frag)
                                 .commit();
                         break;
@@ -161,8 +165,8 @@ public class MainActivity extends AppCompatActivity
                             .commit();
                 }
                 else if (frag_state instanceof FoodFragment){
-                    // Set the meals for the flare up
-                    flareUp.setMeals(((FoodFragment) frag_state).getMeals());
+                    // Set the foods for the flare up
+                    flareUp.setFoods(((FoodFragment) frag_state).getMeals());
 
                     frag_state = unverified_frag;
 
@@ -173,6 +177,13 @@ public class MainActivity extends AppCompatActivity
                             .replace(R.id.fragment_container, unverified_frag)
                             .replace(R.id.cal_fragment_container, toggle_frag)
                             .commit();
+
+                    // print the combinations
+                    callPython();
+
+                    //clear the meals in the food fragment and the flare up
+                    food_frag.resetMeals();
+                    flareUp.reset();
                 }
                 
             }
@@ -184,19 +195,18 @@ public class MainActivity extends AppCompatActivity
 
     // call sample Python Output
     public void callPython(){
-        Python py = Python.getInstance();
 
-        // input data
-        String[][] arr = {{"Bumpy", "8/1/2019 2pm", "A", "B", "C"},
-                {"Bumpy", "8/5/2019 6pm", "A", "C", "D"},
-                {"Bumpy", "8/12/2019 4pm", "A", "C"},
-                {"Scaly", "8/14/2019 9am", "C", "B", "D"},
-                {"Scaly", "8/20/2019 12pm", "A", "B", "D"},
-                {"Scaly", "8/25/2019 3pm", "A", "B"}};
+//        // input data
+//        String[][] arr = {{"Bumpy", "8/1/2019 2pm", "A", "B", "C"},
+//                {"Bumpy", "8/5/2019 6pm", "A", "C", "D"},
+//                {"Bumpy", "8/12/2019 4pm", "A", "C"},
+//                {"Scaly", "8/14/2019 9am", "C", "B", "D"},
+//                {"Scaly", "8/20/2019 12pm", "A", "B", "D"},
+//                {"Scaly", "8/25/2019 3pm", "A", "B"}};
 
-        PyObject matchingClass = py.getModule("MatchingAlgorithm").callAttr("MatchingAlgorithm");
-        String pyText = matchingClass.callAttr("run", (Object)arr).toString();
-        Log.d("PYTHON", pyText);
+        String pyText = pyMatchGenerator.callAttr("get_prediction", flareUp.getSymptoms().iterator().next(), flareUp.getTimestamp(), flareUp.getFoods().toArray()).toString();
+        pyMatchGenerator.callAttr("clear_output_str");
+        Log.d("Python", pyText);
     }
 
 
@@ -255,12 +265,13 @@ public class MainActivity extends AppCompatActivity
                 .commit();
     }
 
+
     @Override
     public void verifiedBtnClicked() {
-        frag_state = symptom_frag;
+        frag_state = verified_frag;
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, master_frag)
+                .replace(R.id.fragment_container, verified_frag)
                 .commit();
     }
 
@@ -276,8 +287,8 @@ public class MainActivity extends AppCompatActivity
         private static final String TAG = "FlareUp";
 
         HashSet<String> symptoms = new HashSet<>();
-        ArrayList<ArrayList<String>> meals = new ArrayList<>();
-        String timestamp = "";
+        ArrayList<String> foods = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
 
         public FlareUp() {
         }
@@ -291,24 +302,27 @@ public class MainActivity extends AppCompatActivity
             return symptoms;
         }
 
-        public void setMeals(ArrayList<ArrayList<String>> meals) {
+        public void setFoods(ArrayList<ArrayList<String>> meals) {
             Log.d(TAG, "Meals Entered: " + meals.toString());
-            this.meals = meals;
+
+            // flatten the foods into one
+            for (ArrayList<String> m : meals){
+                this.foods.addAll(m);
+            }
         }
 
-        public ArrayList<ArrayList<String>> getMeals() {
-            return meals;
+        public ArrayList<String> getFoods() {
+            return foods;
         }
 
         public String getTimestamp() {
-            return timestamp;
+            return calendar.getTime().toString();
         }
 
         public void reset() {
             Log.d(TAG, "Flare up reset.");
             symptoms = new HashSet<>();
-            meals = new ArrayList<>();
-            timestamp = "";
+            foods = new ArrayList<>();
         }
 
     }

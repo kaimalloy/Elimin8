@@ -50,7 +50,7 @@
                         android:paddingBottom="3dp"
                         android:paddingTop="3dp"
                         android:orientation="horizontal"
-                        android:background="@color/white">
+                        android:background="@android:color/white">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
                         android:layout_margin="20dp"
                         android:background="@drawable/ok_btn"
                         android:text="Add to Master List"
-                        android:textColor="@color/white"/>
+                        android:textColor="@android:color/white"/>
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

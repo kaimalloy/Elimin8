@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:text="Ok"
                 android:background="@drawable/ok_btn"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:layout_gravity="center"
                 android:layout_margin="20dp"/>
 
